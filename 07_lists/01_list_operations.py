@@ -1,0 +1,32 @@
+employees = ['Mahesh', 'Sahana', 'Arun']
+print(employees)
+print(employees[0])
+print(employees[1])
+print(employees[2])
+print(employees[-1])
+
+employees[2] = 'Priya'
+employees.append('Abhi')
+employees.insert(0,'Naga')
+print(employees)
+employees.remove('Priya')
+print(employees)
+employees.pop()
+print(employees)
+print(len(employees))
+print("Mahesh" in employees)
+print("Rahul" in employees)
+employees.sort()
+print(employees)
+employees.sort(reverse=True)
+print(employees)
+employees.reverse()
+print(employees)
+for emp in employees:
+    print(emp)
+
+print(employees[:-1])
+print(employees[:3])
+print(employees[2:])
+print(employees[1:4])
+print(employees[-2:])
