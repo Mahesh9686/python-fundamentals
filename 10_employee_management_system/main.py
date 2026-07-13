@@ -24,6 +24,10 @@ def add_employee(employees):
         employees.append(employee)
         print("-" * 100)
 
+def print_employee(employee):
+    row_format = "{:<12} {:15} {:<30} {:<10} {:>10}"
+    print(row_format.format(employee["employee_id"], employee["employee_name"], employee["department"], employee["salary"], employee["experience"]))
+
 def show_employees(employees):
     if len(employees) == 0:
         print("\nNo employees to display.")
@@ -31,8 +35,8 @@ def show_employees(employees):
     row_format = "{:<12} {:15} {:<30} {:<10} {:>10}"
     print(row_format.format("\nEmployee ID", "Employee Name", "Department", "Salary", "Experience"))
     print('-' * 100)
-    for items in employees:
-        print(row_format.format(items['employee_id'], items['employee_name'], items['department'], items['salary'], items['experience']))
+    for employee in employees:
+        print_employee(employee)
     
 
 def search_employee(employees):
@@ -41,12 +45,12 @@ def search_employee(employees):
         return
     name = input("Please enter the employee name to search: ")
     row_format = "{:<12} {:15} {:<30} {:<10} {:>10}"
-    for items in employees:
-        if items['employee_name'] == name:
+    for employee in employees:
+        if employee['employee_name'] == name:
             print("\nEmployee Found!!")
             print(row_format.format("\nEmployee ID", "Employee Name", "Department", "Salary", "Experience"))
             print('-' * 100)
-            print(row_format.format(items['employee_id'], items['employee_name'], items['department'], items['salary'], items['experience']))
+            print_employee(employee)
             return
     print("\nEmployee Not Found!")
 
@@ -60,12 +64,12 @@ def employee_analytics(employees):
     total_salary = 0
     highest_salary = employees[0]['salary']
     lowest_salary = employees[0]['salary']
-    for items in employees:
-        total_salary += items['salary']
-        if highest_salary < items['salary']:
-            highest_salary = items['salary']
-        if lowest_salary > items['salary']:
-            lowest_salary = items['salary']
+    for employee in employees:
+        total_salary += employee['salary']
+        if highest_salary < employee['salary']:
+            highest_salary = employee['salary']
+        if lowest_salary > employee['salary']:
+            lowest_salary = employee['salary']
     average_salary = total_salary / total_employees
     print(row_format.format('Average Salary', ':', average_salary))
     print(row_format.format('Highest Salary', ':', highest_salary))
@@ -76,10 +80,10 @@ def update_salary(employees):
         print("\nNo employees to display.")
         return
     employee_id = int(input('Enter Employee ID to update salary: '))
-    for items in employees:
-        if items['employee_id'] == employee_id:
-            print(f"Current Salary : {items['salary']}")
-            items['salary'] = float(input("Enter New Salary: "))
+    for employee in employees:
+        if employee['employee_id'] == employee_id:
+            print(f"Current Salary : {employee['salary']}")
+            employee['salary'] = float(input("Enter New Salary: "))
             print("\nSalary Updated Successfully")
             return
     print("Employee Not Found!")
@@ -89,8 +93,8 @@ def delete_employee(employees):
         print("\nNo employees to display.")
         return
     employee_id = int(input('Enter Employee ID to delete: '))
-    for index, items in enumerate(employees):
-        if items['employee_id'] == employee_id:
+    for index, employee in enumerate(employees):
+        if employee['employee_id'] == employee_id:
             employees.pop(index)
             print('Employee Deleted Successfully')
             return
