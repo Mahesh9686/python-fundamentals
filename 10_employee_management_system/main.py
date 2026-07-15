@@ -14,16 +14,16 @@ def menu():
 def get_valid_integer(prompt):
     while True:
         try:
-            valid_id = int(input(prompt))
-            return valid_id
+            value = int(input(prompt))
+            return value
         except ValueError:
             print("Please enter valid integers only!")
 
 def get_valid_float(prompt):
     while True:
         try:
-            valid_id = float(input(prompt))
-            return valid_id
+            value = float(input(prompt))
+            return value
         except ValueError:
             print("Please enter valid integers only!")
 
