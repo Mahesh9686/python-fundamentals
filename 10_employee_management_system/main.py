@@ -9,10 +9,8 @@ def menu():
     print("4. Employee Analytics")
     print("5. Update Salary")
     print("6. Delete Employee")
-    print("7. Exit")
-    selected_option = get_valid_integer("\nPlease select an option: ")
-    return selected_option
-
+    print("7. Exit")    
+    
 def get_valid_integer(prompt):
     while True:
         try:
@@ -21,6 +19,26 @@ def get_valid_integer(prompt):
         except ValueError:
             print("Please enter valid integers only!")
 
+def get_valid_float(prompt):
+    while True:
+        try:
+            valid_id = float(input(prompt))
+            return valid_id
+        except ValueError:
+            print("Please enter valid integers only!")
+
+def get_valid_choice(prompt, min_option, max_option):
+    while True:
+        try:        
+            selection = int(input(prompt))
+            if selection >= min_option and selection <= max_option:
+                return selection
+            else:
+                print("Please select valid option (1-7)!")
+                continue
+        except ValueError:
+            print("Please enter valid integer only!")
+
 
 def add_employee(employees):
     number_of_employees = int(input("How many Employees do you want to add? "))
@@ -28,8 +46,8 @@ def add_employee(employees):
         employee = {"employee_id" : get_valid_integer("Please enter Employee ID: "),
                     "employee_name" : input("Please enter Employee Name: "),
                     "department" : input("Please enter Employee Department: "),
-                    "salary" : float(input("Please enter Employee Salary: ")),
-                    "experience" : float(input("Please enter the Employee Experience: "))}
+                    "salary" : get_valid_float("Please enter Employee Salary: "),
+                    "experience" : get_valid_float("Please enter the Employee Experience: ")}
         employees.append(employee)
         print("-" * 100)
 
@@ -103,7 +121,7 @@ def update_salary(employees):
         return
     else:
          print(f"Current Salary : {employees[index]['salary']}")
-         employees[index]['salary'] = float(input("Enter New Salary: "))
+         employees[index]['salary'] = get_valid_float("Enter New Salary: ")
          print("\nSalary Updated Successfully")
    
 
@@ -127,7 +145,8 @@ def exit_program():
 def main():
     employees = []
     while True:
-        selection = menu()
+        menu()
+        selection = get_valid_choice("\nPlease select an option: ", 1, 7)
         if selection == 1:
             add_employee(employees)
         elif selection == 2:
